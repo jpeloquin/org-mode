@@ -578,11 +578,13 @@ INFO is the export state, as a property list."
                (let ((k (org-element-property :key ref))
                      (prefix (org-element-property :prefix ref))
                      (suffix (org-element-property :suffix ref)))
-                 (funcall format-ref
+                 (if (org-cite-basic--get-entry k info)
+                     (funcall format-ref
                           prefix
                           (org-cite-basic--get-author k info)
                           (org-cite-basic--get-year k info)
-                          suffix)))
+                          suffix)
+                   (org-cite-concat prefix k suffix))))
              (org-cite-get-references citation)
              org-cite-basic-author-year-separator)
             (org-element-property :suffix citation))
