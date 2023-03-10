@@ -372,7 +372,8 @@ be set to a buffer or a buffer name.  `shell-command' then uses
 it for output."
   (let* ((base-name (file-name-base source))
 	 (full-name (file-truename source))
-         (relative-name (file-relative-name source))
+         (relative-name (file-relative-name source
+                          (file-truename default-directory)))
 	 (out-dir (if (file-name-directory source)
                       ;; Expand "~".  Shell expansion will be disabled
                       ;; in the shell command call.
